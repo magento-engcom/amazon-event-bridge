@@ -1,0 +1,9 @@
+{
+    "name": "magento/amazon-event-bridge-integration",
+    "description": "Amazon Event Bridge integration",
+    "type": "metapackage",
+    "require": {
+        "magento/module-amazon-event-bridge-api": "*",
+        "magento/module-amazon-event-bridge": "*"
+    }
+}
