@@ -43,7 +43,7 @@ class PutTestEvent extends Command
 
     protected function configure()
     {
-        $this->setName('eventbridge:putevent');
+        $this->setName('eventbridge:test');
         parent::configure();
     }
 
@@ -58,7 +58,5 @@ class PutTestEvent extends Command
         ]);
 
         $this->putEvents->putEvents([$event]);
-
-        $output->writeln('done');
     }
 }
