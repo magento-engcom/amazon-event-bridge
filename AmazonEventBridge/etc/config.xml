@@ -7,10 +7,15 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <amazoneventbridge>
+        <amazon>
             <api>
-                <version>latest</version>
+                <eventbridge>
+                    <version>latest</version>
+                </eventbridge>
+                <sqs>
+                    <version>latest</version>
+                </sqs>
             </api>
-        </amazoneventbridge>
+        </amazon>
     </default>
 </config>
