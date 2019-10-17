@@ -2,7 +2,10 @@
     "name": "magento/module-amazon-event-bridge",
     "description": "N/A",
     "require": {
-        "php": "~7.1.3||~7.2.0"
+        "php": "~7.1.3||~7.2.0",
+        "magento/framework": "*",
+        "magento/module-amazon-event-bridge-api": "*",
+        "aws/aws-sdk-php": "^3.112"
     },
     "type": "magento2-module",
     "license": [
