@@ -7,33 +7,59 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <section id="amazoneventbridge" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="amazon" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Amazon Event Bridge</label>
             <tab>service</tab>
             <resource>Magento_Config::advanced</resource>
             <group id="api" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>API Configuration</label>
-                <field id="version" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>API Version</label>
-                    <comment>Lock AWS API version</comment>
-                    <validate>validate-string</validate>
-                </field>
-                <field id="key" translate="label comment" type="text" sortOrder="62" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>AWS API Key</label>
-                    <comment>AWS API Key</comment>
-                    <validate>validate-string</validate>
-                </field>
-                <field id="secret" translate="label comment" type="text" sortOrder="63" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>AWS API Secret</label>
-                    <comment>AWS API Secret</comment>
-                    <validate>validate-string</validate>
-                </field>
-                <field id="region" translate="label comment" type="text" sortOrder="64" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>AWS Region</label>
-                    <comment>AWS Region</comment>
-                    <validate>validate-string</validate>
-                </field>
+                <group id="eventbridge" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>EventBridge API Configuration</label>
+                    <field id="version" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS API Version</label>
+                        <comment>Lock AWS API version</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="key" translate="label comment" type="text" sortOrder="62" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS API Key</label>
+                        <comment>AWS API Key</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="secret" translate="label comment" type="text" sortOrder="63" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS API Secret</label>
+                        <comment>AWS API Secret</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="region" translate="label comment" type="text" sortOrder="64" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS Region</label>
+                        <comment>AWS Region</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                </group>
+
+                <group id="sqs" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SQS API Configuration</label>
+                    <field id="version" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS API Version</label>
+                        <comment>Lock AWS API version</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="key" translate="label comment" type="text" sortOrder="72" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS API Key</label>
+                        <comment>AWS API Key</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="secret" translate="label comment" type="text" sortOrder="73" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS API Secret</label>
+                        <comment>AWS API Secret</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="region" translate="label comment" type="text" sortOrder="74" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS Region</label>
+                        <comment>AWS Region</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                </group>
             </group>
         </section>
     </system>

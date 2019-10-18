@@ -13,6 +13,7 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="eventbridge" xsi:type="object">Magento\AmazonEventBridge\Console\Command\PutTestEvent</item>
+                <item name="sqs_receive" xsi:type="object">Magento\AmazonEventBridge\Console\Command\ReceiveMessage</item>
             </argument>
         </arguments>
     </type>

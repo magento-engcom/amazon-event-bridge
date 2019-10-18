@@ -19,10 +19,10 @@ class PutEvents implements PutEventsInterface
     /**
      * System setting paths for API configuration values
      */
-    private const API_VERSION_KEY = 'amazoneventbridge/api/version';
-    private const API_REGION_KEY = 'amazoneventbridge/api/region';
-    private const API_KEY_KEY = 'amazoneventbridge/api/key';
-    private const API_SECRET_KEY = 'amazoneventbridge/api/secret';
+    private const API_VERSION_KEY = 'amazon/api/eventbridge/version';
+    private const API_REGION_KEY = 'amazon/api/eventbridge/region';
+    private const API_KEY_KEY = 'amazon/api/eventbridge/key';
+    private const API_SECRET_KEY = 'amazon/api/eventbridge/secret';
 
     /**
      * @var EventBridgeClient
@@ -102,7 +102,7 @@ class PutEvents implements PutEventsInterface
      *
      * @return EventBridgeClient
      */
-    private function getClient()
+    private function getClient(): EventBridgeClient
     {
         if(empty($this->client)) {
             $this->client = new EventBridgeClient([
