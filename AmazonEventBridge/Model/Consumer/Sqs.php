@@ -22,10 +22,10 @@ class Sqs
     /**
      * System setting paths for API configuration values
      */
-    const API_VERSION_KEY = 'amazon/api/sqs/version';
-    const API_REGION_KEY = 'amazon/api/sqs/region';
-    const API_KEY_KEY = 'amazon/api/sqs/key';
-    const API_SECRET_KEY = 'amazon/api/sqs/secret';
+    private const API_VERSION_KEY = 'amazon/api/sqs/version';
+    private const API_REGION_KEY = 'amazon/api/sqs/region';
+    private const API_KEY_KEY = 'amazon/api/sqs/key';
+    private const API_SECRET_KEY = 'amazon/api/sqs/secret';
 
     /**
      * @var SqsClient
