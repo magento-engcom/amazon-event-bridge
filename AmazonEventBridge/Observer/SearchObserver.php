@@ -13,7 +13,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-class AddItemToCartObserver implements ObserverInterface
+class SearchObserver implements ObserverInterface
 {
     /**
      * @var PutEventsInterface
@@ -30,6 +30,11 @@ class AddItemToCartObserver implements ObserverInterface
      */
     private $storeManager;
 
+    /**
+     * @param PutEventsInterface $putEvents
+     * @param EventInterfaceFactory $eventFactory
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
         PutEventsInterface $putEvents,
         EventInterfaceFactory $eventFactory,
@@ -41,19 +46,21 @@ class AddItemToCartObserver implements ObserverInterface
     }
 
     /**
-     * Put "add to cart" event to AWS
+     * Put Magento event to EventBridge
      *
      * @param Observer $observer
      */
     public function execute(Observer $observer)
     {
         $magentoEvent = $observer->getEvent();
-        $magentoEventData = $magentoEvent->getData('quote_item')->getData();
-        $magentoEventData['product'] = $magentoEventData['product']->getData();
+        $request = $magentoEvent->getData('request');
+
+        $queryString = $request->getQuery()['q'];
+        $detail = ['searchString' => $queryString];
 
         $event = $this->eventFactory->create(['data' => [
             'detailType' => $magentoEvent->getName(),
-            'detail' => $magentoEventData,
+            'detail' => $detail,
             'source' => $this->storeManager->getStore()->getBaseUrl(),
             'time' => date('Y-m-d h:i:s')
         ]]);

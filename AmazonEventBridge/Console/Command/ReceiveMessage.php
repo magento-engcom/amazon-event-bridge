@@ -45,7 +45,7 @@ class ReceiveMessage extends Command
     {
         $queue = $input->getOption('queue');
         $delete = $input->getOption('delete');
-        $messages = $this->sqsConsumer->receiveMessage($queue);
+        $messages = $this->sqsConsumer->receiveMessages($queue);
 
         foreach($messages as $message){
             $output->writeln($message->getBody());

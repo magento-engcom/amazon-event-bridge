@@ -69,7 +69,7 @@ class Sqs
      * @param int $maxNumMessages
      * @return SqsMessage[]
      */
-    public function receiveMessage(string $queueUrl, int $maxNumMessages = 1): array
+    public function receiveMessages(string $queueUrl, int $maxNumMessages = 1): array
     {
         $client = $this->getClient();
         try {
