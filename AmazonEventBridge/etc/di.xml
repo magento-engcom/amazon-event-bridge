@@ -9,6 +9,9 @@
     <preference for="Magento\AmazonEventBridgeApi\Api\PutEventsInterface" type="\Magento\AmazonEventBridge\Model\PutEvents" />
     <preference for="Magento\AmazonEventBridgeApi\Api\Data\EventInterface" type="Magento\AmazonEventBridge\Model\Data\Event" />
 
+    <preference for="Magento\AmazonEventBridge\Model\Product\EventManagerInterface"
+                type="Magento\AmazonEventBridge\Model\Product\EventManager" />
+
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
