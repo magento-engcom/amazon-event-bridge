@@ -9,6 +9,7 @@ namespace Magento\AmazonEventBridge\Model\Product;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Interface EventManagerInterface
@@ -23,6 +24,7 @@ interface EventManagerInterface
      * @param ProductInterface  $product
      * @param CustomerInterface $customer
      * @throws \RuntimeException
+     * @throws LocalizedException
      * @return void
      */
     public function watchProduct(ProductInterface $product, CustomerInterface $customer): void;

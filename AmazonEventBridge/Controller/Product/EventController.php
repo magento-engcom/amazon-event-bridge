@@ -7,21 +7,27 @@ declare(strict_types=1);
 
 namespace Magento\AmazonEventBridge\Controller\Product;
 
+use Magento\AmazonEventBridge\Model\Product\EventManagerInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\AmazonEventBridge\Model\Product\EventManagerInterface;
 use Magento\Customer\Model\Customer;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
-use Magento\Customer\Model\Session;
+use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\Request\InvalidRequestException;
+use Magento\Framework\App\RequestInterface;
 use Psr\Log\LoggerInterface;
+use Magento\Framework\Controller\Result\Redirect;
+use Magento\Framework\Phrase;
 
 /**
  * Class EventController
  *
  * @package Magento\AmazonEventBridge\Controller\Product
  */
-class EventController extends \Magento\Framework\App\Action\Action implements HttpPostActionInterface
+class EventController extends \Magento\Framework\App\Action\Action
+    implements HttpPostActionInterface, CsrfAwareActionInterface
 {
     /**
      * @var ProductRepositoryInterface
@@ -48,6 +54,15 @@ class EventController extends \Magento\Framework\App\Action\Action implements Ht
      */
     private $logger;
 
+    /**
+     * EventController constructor.
+     * @param Context $context
+     * @param ProductRepositoryInterface $productRepository
+     * @param CustomerRepositoryInterface $customerRepository
+     * @param EventManagerInterface $productEventManager
+     * @param LoggerInterface $logger
+     * @param Session $session
+     */
     public function __construct(
         Context $context,
         ProductRepositoryInterface $productRepository,
@@ -78,13 +93,38 @@ class EventController extends \Magento\Framework\App\Action\Action implements Ht
             $this->messageManager->addSuccessMessage(
                 __('Product has been added to your watch list.')
             );
-
         } catch (\Throwable $e) {
             $this->logger->error($e);
             $this->messageManager->addErrorMessage(
                 __('Something went wrong. Please try again later.')
             );
         }
+
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
+    {
+        /** @var Redirect $resultRedirect */
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+
+        return new InvalidRequestException(
+            $resultRedirect,
+            [new Phrase('Invalid Form Key. Please refresh the page.')]
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validateForCsrf(RequestInterface $request): ?bool
+    {
+        return null;
     }
 
     /**
