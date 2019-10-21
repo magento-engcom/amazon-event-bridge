@@ -30,7 +30,12 @@
                         <comment>AWS API Secret</comment>
                         <validate>validate-string</validate>
                     </field>
-                    <field id="region" translate="label comment" type="text" sortOrder="64" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <field id="token" translate="label comment" type="text" sortOrder="64" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS Session Token</label>
+                        <comment>AWS Session Token (optional)</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="region" translate="label comment" type="text" sortOrder="65" showInDefault="1" showInWebsite="0" showInStore="0">
                         <label>AWS Region</label>
                         <comment>AWS Region</comment>
                         <validate>validate-string</validate>
@@ -54,7 +59,12 @@
                         <comment>AWS API Secret</comment>
                         <validate>validate-string</validate>
                     </field>
-                    <field id="region" translate="label comment" type="text" sortOrder="74" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <field id="token" translate="label comment" type="text" sortOrder="74" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>AWS Session Token</label>
+                        <comment>AWS Session Token (optional)</comment>
+                        <validate>validate-string</validate>
+                    </field>
+                    <field id="region" translate="label comment" type="text" sortOrder="75" showInDefault="1" showInWebsite="0" showInStore="0">
                         <label>AWS Region</label>
                         <comment>AWS Region</comment>
                         <validate>validate-string</validate>

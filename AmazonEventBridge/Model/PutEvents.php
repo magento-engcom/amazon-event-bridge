@@ -23,6 +23,7 @@ class PutEvents implements PutEventsInterface
     private const API_REGION_KEY = 'amazon/api/eventbridge/region';
     private const API_KEY_KEY = 'amazon/api/eventbridge/key';
     private const API_SECRET_KEY = 'amazon/api/eventbridge/secret';
+    private const API_TOKEN_KEY = 'amazon/api/sqs/token';
 
     /**
      * @var EventBridgeClient
@@ -61,7 +62,11 @@ class PutEvents implements PutEventsInterface
      */
     public function putEvents(array $events): void
     {
-        $client = $this->getClient();
+        try{
+            $client = $this->getClient();
+        } catch (\Exception $e){
+            $this->logger->error('Amazon Event Bridge Error', [$e->getMessage()]);
+        }
         $entries = [];
         foreach($events as $event){
             try {
@@ -104,14 +109,19 @@ class PutEvents implements PutEventsInterface
      */
     private function getClient(): EventBridgeClient
     {
+        $credentials = [
+            'key' => $this->scopeConfig->getValue(self::API_KEY_KEY),
+            'secret' => $this->scopeConfig->getValue(self::API_SECRET_KEY),
+        ];
+        if(!empty($this->scopeConfig->getValue(self::API_TOKEN_KEY))){
+            $credentials['token'] = $this->scopeConfig->getValue(self::API_TOKEN_KEY);
+        }
+
         if(empty($this->client)) {
             $this->client = new EventBridgeClient([
                 'version' => $this->scopeConfig->getValue(self::API_VERSION_KEY),
                 'region' => $this->scopeConfig->getValue(self::API_REGION_KEY),
-                'credentials' => [
-                    'key' => $this->scopeConfig->getValue(self::API_KEY_KEY),
-                    'secret' => $this->scopeConfig->getValue(self::API_SECRET_KEY)
-                ]
+                'credentials' => $credentials
             ]);
         }
 

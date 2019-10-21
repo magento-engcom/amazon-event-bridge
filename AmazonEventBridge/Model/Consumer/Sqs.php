@@ -26,6 +26,7 @@ class Sqs
     private const API_REGION_KEY = 'amazon/api/sqs/region';
     private const API_KEY_KEY = 'amazon/api/sqs/key';
     private const API_SECRET_KEY = 'amazon/api/sqs/secret';
+    private const API_TOKEN_KEY = 'amazon/api/sqs/token';
 
     /**
      * @var SqsClient
@@ -127,14 +128,19 @@ class Sqs
      */
     private function getClient(): SqsClient
     {
+        $credentials = [
+            'key' => $this->scopeConfig->getValue(self::API_KEY_KEY),
+            'secret' => $this->scopeConfig->getValue(self::API_SECRET_KEY),
+        ];
+        if(!empty($this->scopeConfig->getValue(self::API_TOKEN_KEY))){
+            $credentials['token'] = $this->scopeConfig->getValue(self::API_TOKEN_KEY);
+        }
+
         if (empty($this->client)) {
             $this->client = new SqsClient([
                 'version' => $this->scopeConfig->getValue(self::API_VERSION_KEY),
                 'region' => $this->scopeConfig->getValue(self::API_REGION_KEY),
-                'credentials' => [
-                    'key' => $this->scopeConfig->getValue(self::API_KEY_KEY),
-                    'secret' => $this->scopeConfig->getValue(self::API_SECRET_KEY)
-                ]
+                'credentials' => $credentials
             ]);
         }
 
